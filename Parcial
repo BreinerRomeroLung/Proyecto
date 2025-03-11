@@ -1,0 +1,59 @@
+@startuml
+class Aeropuerto {
+    - String codigo
+    - String nombre
+    - String ubicacion
+    - String pais
+}
+
+class Avion {
+    - String modelo
+    - int capacidad
+}
+
+class Pasajero {
+    - String nombre
+    - String numeroPasaporte
+    - String contacto
+    - String preferencias
+}
+
+class ProgramaDeVuelo {
+    - String numeroVuelo
+    - String aerolinea
+    - List<String> diasOperacion
+    - Aeropuerto origen
+    - Aeropuerto destino
+}
+
+class Vuelo {
+    - Date fecha
+    - int plazasVacias
+    - Avion modeloAvion
+    - ProgramaDeVuelo programaDeVuelo
+    - List<EscalaTecnica> escalas
+}
+
+class EscalaTecnica {
+    - Aeropuerto aeropuertoEscala
+    - int orden
+}
+
+class Reserva {
+    - String numeroReserva
+    - Pasajero pasajero
+    - Vuelo vuelo
+    - String asiento
+    - boolean confirmado
+}
+
+' Relaciones
+ProgramaDeVuelo --> Aeropuerto : origen
+ProgramaDeVuelo --> Aeropuerto : destino
+Vuelo --> ProgramaDeVuelo
+Vuelo --> Avion
+Vuelo --> EscalaTecnica : escalas *
+Reserva --> Vuelo
+Reserva --> Pasajero
+EscalaTecnica --> Aeropuerto
+@enduml
